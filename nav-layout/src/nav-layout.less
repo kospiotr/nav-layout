@@ -1,0 +1,72 @@
+.nl-layout {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+
+  &.nl-off-canvas {
+    .nl-aside {
+      position: absolute;
+    }
+
+    &.nl-north {
+      .nl-aside {
+        width: 100%;
+        top: 0;
+      }
+
+    }
+    &.nl-east {
+      .nl-aside {
+        height: 100%;
+        right: 0;
+      }
+    }
+
+    &.nl-south {
+      .nl-aside {
+        width: 100%;
+        bottom: 0;
+      }
+    }
+
+    &.nl-west {
+      .nl-aside {
+        height: 100%;
+        left: 0;
+      }
+    }
+
+  }
+
+  .nl-aside {
+    box-sizing: border-box;
+  }
+
+  .nl-content {
+    box-sizing: border-box;
+    flex: 1;
+  }
+
+  &.nl-north {
+    flex-direction: column;
+  }
+
+  &.nl-east {
+    flex-flow: row-reverse;
+  }
+
+  &.nl-south {
+    flex-flow: column-reverse;
+  }
+
+  &nl-west {
+    flex-flow: row;
+  }
+
+  &.nl-closed {
+    .nl-aside {
+      display: none;
+    }
+  }
+
+}

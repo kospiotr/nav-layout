@@ -1,0 +1,20 @@
+{
+  "name": "nav-layout",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build && cp ./src ./build -r && cp ./node_modules/jquery/dist/jquery.min.js ./build/tour && cp ./node_modules/less/dist/less.min.js ./build/tour && lessc src/styles.less build/tour/layout.css",
+    "watch": "browser-sync start --server --files \"*.*\"",
+    "dev": "browser-sync start --server ./src --files \"./src/**/*.*\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.1",
+    "jquery": "^3.1.1",
+    "less": "^2.7.1",
+    "node-sass": "^3.13.0",
+    "watch": "^1.0.1"
+  }
+}

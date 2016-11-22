@@ -1,0 +1,123 @@
+<html>
+<head>
+    <title>Positions</title>
+    <link rel="stylesheet/less" type="text/css" href="../../nav-layout.less"/>
+    <link rel="stylesheet" type="text/css" href="./styles.css"/>
+    <script>
+        less = {
+            env: "development",
+            async: false,
+            fileAsync: false,
+            poll: 1000,
+            functions: {},
+            dumpLineNumbers: "comments",
+            relativeUrls: false,
+            rootpath: ":/a.com/"
+        };
+    </script>
+    <script src="less.min.js"></script>
+</head>
+<body>
+
+<script>
+    (function () {
+
+        var availablePositions = [null, 'nl-north', 'nl-east', 'nl-south', 'nl-west'];
+        var heights = [null, availablePositions.map(function (e) {
+            return e === 'nl-north' || e === 'nl-south' ? 'style="width: 60px"' : 'style="width: 60px"'
+        })];
+        var close = ['nl-closed'];
+        var offCanvas = ['nl-off-canvas'];
+
+        row('Position', permuteSections({layout: [availablePositions]}));
+        row('Close', permuteSections({layout: [availablePositions, close]}));
+        row('Off Canvas', permuteSections({layout: [availablePositions, offCanvas]}));
+
+
+        generateCode();
+
+        function row(title, sectionsArray) {
+            var dom = document.createElement('div');
+//            headingRowDom.innerText = title;
+//            var rowDom = document.createElement('div');
+//            rowDom.addClass("row");
+
+            var sections = sectionsArray.map(function (e) {
+                return '<section>\n' +
+                        '<div class="nl-layout' + e.layout + '">\n' +
+                        '    <div class="nl-aside">aside</div>\n' +
+                        '    <div class="nl-content">content</div>\n' +
+                        '</div>\n' +
+                        '</section>';
+            });
+
+            dom.innerHTML = '<h1>' + title + '</h1>' +
+                    '<div class="row">' +
+                    sections.join("") +
+                    '</div>';
+            document.body.appendChild(dom);
+        }
+
+        /**
+         * Accepts config with parameters:
+         *  - title - row title
+         *  - layout options is Array<Array<Options>>
+         *
+         *  For example: sections({layouts: [['nl-closed', 'nl-open'], ['nl-north','nl-south']]})
+         *  Will produce:
+         *      layout(nl-closed nl-north), layout(nl-closed nl-south),layout(nl-open nl-north),layout(nl-open nl-south),
+         * @param config
+         * @returns {Array}
+         */
+        function permuteSections(config) {
+            var out = [],
+                    layouts = config.layout || [],
+                    optionsCount = layouts.length,
+                    permutationCount = layouts.reduce(
+                            function (acc, layoutOptions) {
+                                var optionCount = layoutOptions.length;
+                                return acc === 0 ? optionCount : optionCount * acc
+                            }, 0);
+
+            for (var i = 0; i < permutationCount; i++) {
+                var value = '',
+                        step = permutationCount,
+                        rest = i;
+                for (var j = 0; j < optionsCount; j++) {
+                    var option = layouts[j],
+                            optionLength = option.length,
+                            elIndex,
+                            optionValue;
+                    step = step / optionLength;
+                    elIndex = Math.floor(rest / step);
+                    rest = rest % step;
+                    optionValue = option[elIndex];
+                    if (optionValue) {
+                        value += ' ' + optionValue;
+                    }
+                }
+                out.push({
+                    title: config.title,
+                    layout: value
+                });
+            }
+            return out;
+        }
+
+        function generateCode() {
+            var sections = document.getElementsByTagName('section');
+            for (var i = 0; i < sections.length; i++) {
+                var section = sections[i];
+                var layoutDom = section.getElementsByClassName('nl-layout')[0];
+                var sectionAsText = layoutDom.outerHTML;
+                var code = document.createElement("code");
+                var pre = document.createElement("pre");
+                pre.innerText = sectionAsText.replace(/        /g, '');
+                code.appendChild(pre);
+                section.appendChild(code);
+            }
+        }
+    })();
+</script>
+</body>
+</html>
