@@ -4,17 +4,39 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf build && cp ./src ./build -r && cp ./node_modules/jquery/dist/jquery.min.js ./build/tour && cp ./node_modules/less/dist/less.min.js ./build/tour && lessc src/styles.less build/tour/layout.css",
+    "clean:build": "rm -rf build",
+    "clean:test": "rm -rf build/test",
+    "build:init": "mkdir -p build",
+    "build:src": "lessc src/nav-layout.less build/nav-layout.css",
+    "build:site": "cp build/nav-layout.css src/site/",
+    "build": "npm run clean:build && npm run build:init && npm run build:src && npm run build:site",
     "watch": "browser-sync start --server --files \"*.*\"",
-    "dev": "browser-sync start --server ./src --files \"./src/**/*.*\""
+    "dev": "browser-sync start --server ./src --files \"./src/**/*.*\"",
+    "test": "npm run build && npm run test:local",
+    "test:override": "npm run build && npm run test:local -- --override",
+    "test:local": "npm run clean:test && wdio wdio-local.conf.js",
+    "test:remote": "npm run clean:test && wdio wdio-remote.conf.js",
+    "connect": "ssh -L 4444:localhost:4444 -R 4567:localhost:4567 vps.xperios.pl"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.18.1",
+    "chai": "^3.5.0",
+    "chromedriver": "^2.25.1",
+    "image-diff": "^1.6.3",
     "jquery": "^3.1.1",
     "less": "^2.7.1",
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.2.0",
     "node-sass": "^3.13.0",
-    "watch": "^1.0.1"
+    "phantom": "^3.2.0",
+    "phantomjs": "^2.1.7",
+    "selenium-webdriver": "^3.0.1",
+    "watch": "^1.0.1",
+    "wdio-mocha-framework": "^0.5.4",
+    "wdio-selenium-standalone-service": "0.0.7",
+    "wdio-static-server-service": "^1.0.1",
+    "webdriverio": "^4.4.0"
   }
 }

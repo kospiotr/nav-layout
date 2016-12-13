@@ -1,0 +1,35 @@
+body {
+    font: 15px arial, sans-serif;
+}
+
+body > .nl-layout {
+    border: solid black 1px;
+}
+
+.nl-content {
+    background-color: rgba(249, 255, 206, 0.5);
+}
+
+.nl-content:not(.nl-layout) {
+    border: solid black 1px;
+}
+
+.nl-aside {
+    color: white;
+}
+
+.nl-layout > .nl-aside {
+    background-color: rgba(239, 69, 102, 0.5);
+}
+
+.nl-layout > .nl-layout > .nl-aside {
+    background-color: rgba(246, 154, 154, 0.5);
+}
+
+.nl-layout > .nl-layout > .nl-layout > .nl-aside {
+    background-color: rgba(200, 200, 169, 0.5);
+}
+
+.nl-layout > .nl-layout > .nl-layout > .nl-layout > .nl-aside {
+    background-color: rgba(249, 205, 174, 0.5);
+}

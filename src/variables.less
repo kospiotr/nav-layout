@@ -1,0 +1,20 @@
+@slots: primary, secondary, aside;
+@size: 200px;
+
+@breakpoint-small: 480px;
+@breakpoint-medium: 768px;
+@breakpoint-large: 960px;
+@breakpoint-xlarge: 1220px;
+@breakpoint-mini-max: (@breakpoint-small - 1);
+@breakpoint-small-max: (@breakpoint-medium - 1);
+@breakpoint-medium-max: (@breakpoint-large - 1);
+@breakpoint-large-max: (@breakpoint-xlarge - 1);
+@prefixes: ~'', -xs, -s, -m, -l, -xl;
+
+@collapsed-size: 50px;
+@vertical-collapsed-size: @collapsed-size;
+@horizontal-collapsed-size: @collapsed-size;
+@north-collapsed-size: @horizontal-collapsed-size;
+@east-collapsed-size: @vertical-collapsed-size;
+@south-collapsed-size: @horizontal-collapsed-size;
+@west-collapsed-size: @vertical-collapsed-size;
