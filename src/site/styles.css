@@ -18,15 +18,15 @@ body > .nl-layout {
     color: white;
 }
 
-.nl-layout > .nl-aside {
+#nl-primary-slot {
     background-color: rgba(239, 69, 102, 0.5);
 }
 
-.nl-layout > .nl-layout > .nl-aside {
+#nl-secondary-slot {
     background-color: rgba(246, 154, 154, 0.5);
 }
 
-.nl-layout > .nl-layout > .nl-layout > .nl-aside {
+#nl-tertiary-slot {
     background-color: rgba(200, 200, 169, 0.5);
 }
 

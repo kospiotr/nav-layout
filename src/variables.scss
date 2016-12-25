@@ -1,0 +1,22 @@
+$positions: 'top', 'right', 'bottom', 'left';
+$sizes: '', 's', 'm', 'l', 'xl';
+
+$breakpoint-s: 544px;
+$breakpoint-m: 768px;
+$breakpoint-l: 992px;
+$breakpoint-xl: 1200px;
+
+$vertical-size: auto;
+$horizontal-size: auto;
+$north-size: $horizontal-size;
+$east-size: $vertical-size;
+$south-size: $horizontal-size;
+$west-size: $vertical-size;
+
+$collapsed-size: 50px;
+$vertical-collapsed-size: $collapsed-size;
+$horizontal-collapsed-size: $collapsed-size;
+$north-collapsed-size: $horizontal-collapsed-size;
+$east-collapsed-size: $vertical-collapsed-size;
+$south-collapsed-size: $horizontal-collapsed-size;
+$west-collapsed-size: $vertical-collapsed-size;
