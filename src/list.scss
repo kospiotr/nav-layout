@@ -1,0 +1,28 @@
+@function asList($args...) {
+  $out: ();
+
+  @if (length($args) == 0) {
+    @return $out;
+  }
+
+  @for $i from 1 through length($args) {
+    $out: append($out, nth($args, $i), comma)
+  }
+
+  @return $out;
+}
+
+@function join-to-string($list, $separator: ', ') {
+
+  $out: "";
+
+  @for $i from 1 through length($list) {
+    $val: nth($list, $i);
+    @if ($i > 1) {
+      $out: $out + $separator;
+    }
+    $out: $out + $val;
+  }
+
+  @return $out;
+}

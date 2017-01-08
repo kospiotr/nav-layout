@@ -1,0 +1,231 @@
+@import "../src/breakpoint";
+@import "../src/list";
+@import "true";
+
+@include test-module('Utilities') {
+
+  @include test('should prev breakpoint for s returns xs') {
+    @include assert-equal(
+                    prev-breakpoint($s-breakpoint),
+                    $xs-breakpoint);
+  }
+
+  @include test('should prev breakpoint for xs returns null') {
+    @include assert-equal(
+                    prev-breakpoint($xs-breakpoint),
+                    null);
+  }
+
+  @include test('should next breakpoint for s returns m') {
+    @include assert-equal(
+                    next-breakpoint($s-breakpoint),
+                    $m-breakpoint);
+  }
+
+  @include test('should next breakpoint for xl returns null') {
+    @include assert-equal(
+                    next-breakpoint($xl-breakpoint),
+                    null);
+  }
+
+  @include test('should lte-breakpoints return xs for xs') {
+    @include assert-equal(
+                    lte-breakpoints($xs-breakpoint),
+                    asList($xs-breakpoint));
+  }
+
+  @include test('should lte-breakpoints return xs, s for s') {
+    @include assert-equal(
+                    lte-breakpoints($s-breakpoint),
+                            ($xs-breakpoint, $s-breakpoint));
+  }
+
+  @include test('should lte-breakpoints return xs, s, m for m') {
+    @include assert-equal(
+                    lte-breakpoints($m-breakpoint),
+                            ($xs-breakpoint, $s-breakpoint, $m-breakpoint));
+  }
+
+  @include test('should lte-breakpoints return xs, s, m, l for l') {
+    @include assert-equal(
+                    lte-breakpoints($l-breakpoint),
+                            ($xs-breakpoint, $s-breakpoint, $m-breakpoint, $l-breakpoint));
+  }
+
+  @include test('should lte-breakpoints return xs, s, m, l, xl for xl') {
+    @include assert-equal(
+                    lte-breakpoints($xl-breakpoint),
+                            ($xs-breakpoint, $s-breakpoint, $m-breakpoint, $l-breakpoint, $xl-breakpoint));
+  }
+
+  @include test('should gte-breakpoints return xs, s, m, l, xl for xs') {
+    @include assert-equal(
+                    gte-breakpoints($xs-breakpoint),
+                            ($xs-breakpoint, $s-breakpoint, $m-breakpoint, $l-breakpoint, $xl-breakpoint));
+  }
+
+  @include test('should gte-breakpoints return s, m, l, xl, s for s') {
+    @include assert-equal(
+                    gte-breakpoints($s-breakpoint),
+                            ($s-breakpoint, $m-breakpoint, $l-breakpoint, $xl-breakpoint));
+  }
+
+  @include test('should gte-breakpoints return m, l, xl for m') {
+    @include assert-equal(
+                    gte-breakpoints($m-breakpoint),
+                            ($m-breakpoint, $l-breakpoint, $xl-breakpoint));
+  }
+
+  @include test('should gte-breakpoints return l, xl for l') {
+    @include assert-equal(
+                    gte-breakpoints($l-breakpoint),
+                            ($l-breakpoint, $xl-breakpoint));
+  }
+
+  @include test('should gte-breakpoints return xl for xl') {
+    @include assert-equal(
+                    gte-breakpoints($xl-breakpoint),
+                    asList($xl-breakpoint));
+  }
+
+  @include test('should is-bw work for xs') {
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xs-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xs-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xs-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xs-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xs-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $s-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $s-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $s-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $s-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $s-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $m-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $m-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $m-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $m-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $m-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $l-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $l-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $l-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $l-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $l-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xl-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xl-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xl-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xl-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xs-breakpoint, $xl-breakpoint, $xl-breakpoint), false);
+  }
+
+  @include test('should is-bw work for s') {
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xs-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xs-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xs-breakpoint, $m-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xs-breakpoint, $l-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xs-breakpoint, $xl-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $s-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $s-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $s-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $s-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $s-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $m-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $m-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $m-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $m-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $m-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $l-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $l-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $l-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $l-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $l-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xl-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xl-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xl-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xl-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($s-breakpoint, $xl-breakpoint, $xl-breakpoint), false);
+  }
+
+  @include test('should is-bw work for m') {
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xs-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xs-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xs-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xs-breakpoint, $l-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xs-breakpoint, $xl-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $s-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $s-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $s-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $s-breakpoint, $l-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $s-breakpoint, $xl-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $m-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $m-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $m-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $m-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $m-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $l-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $l-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $l-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $l-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $l-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xl-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xl-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xl-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xl-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($m-breakpoint, $xl-breakpoint, $xl-breakpoint), false);
+  }
+
+  @include test('should is-bw work for l') {
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xs-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xs-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xs-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xs-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xs-breakpoint, $xl-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $s-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $s-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $s-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $s-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $s-breakpoint, $xl-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $m-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $m-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $m-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $m-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $m-breakpoint, $xl-breakpoint), true);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $l-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $l-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $l-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $l-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $l-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xl-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xl-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xl-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xl-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($l-breakpoint, $xl-breakpoint, $xl-breakpoint), false);
+  }
+
+  @include test('should is-bw work for xl') {
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xs-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xs-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xs-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xs-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xs-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $s-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $s-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $s-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $s-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $s-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $m-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $m-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $m-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $m-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $m-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $l-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $l-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $l-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $l-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $l-breakpoint, $xl-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xl-breakpoint, $xs-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xl-breakpoint, $s-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xl-breakpoint, $m-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xl-breakpoint, $l-breakpoint), false);
+    @include assert-equal(is-bw-breakpoints($xl-breakpoint, $xl-breakpoint, $xl-breakpoint), false);
+  }
+
+}

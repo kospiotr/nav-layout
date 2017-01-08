@@ -1,3 +1,98 @@
 @import 'variables';
+@import 'selectors';
+@import 'commons';
+@import 'media';
 
-@include media-breakpoint-up(xs) { ... }
+@mixin media-breakpoints-for($breakpoint) {
+
+  $media: (
+          min-width-from-breakpoint($breakpoint),
+          max-width-from-breakpoint($breakpoint)
+  );
+
+  @media #{render-media($media)} {
+    .nl-layout {
+
+      & {
+
+        @include selector('nl-off-top', $breakpoint) {
+          > .nl-aside {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            top: 0;
+          }
+
+        }
+        @include selector('nl-off-right', $breakpoint) {
+          > .nl-aside {
+            position: absolute;
+            z-index: 1;
+            height: 100%;
+            right: 0;
+          }
+        }
+
+        @include selector('nl-off-bottom', $breakpoint) {
+          > .nl-aside {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            bottom: 0;
+          }
+        }
+
+        @include selector('nl-off-left', $breakpoint) {
+          > .nl-aside {
+            position: absolute;
+            z-index: 1;
+            height: 100%;
+            left: 0;
+          }
+        }
+
+      }
+
+      & {
+
+        @include selector('nl-top', $breakpoint) {
+          flex-direction: column;
+        }
+
+        @include selector('nl-right', $breakpoint) {
+          flex-flow: row-reverse;
+        }
+
+        @include selector('nl-bottom', $breakpoint) {
+          flex-flow: column-reverse;
+        }
+
+        @include selector('nl-left', $breakpoint) {
+          flex-flow: row;
+        }
+      }
+    }
+
+  }
+
+}
+
+.nl-layout {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.nl-aside {
+  box-sizing: border-box;
+}
+
+.nl-content {
+  box-sizing: border-box;
+  flex: 1;
+}
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoints-for($breakpoint)
+}
+

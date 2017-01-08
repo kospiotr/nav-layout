@@ -1,0 +1,20 @@
+@import "list";
+
+@function render-media($media) {
+
+  $min-width: nth($media, 1);
+  $max-width: nth($media, 2);
+
+  $out: ();
+
+  @if ($min-width != null) {
+    $out: append($out, "( min-width: " + $min-width + " )");
+  }
+  @if ($max-width != null) {
+    $out: append($out, "( max-width: " + $max-width + " )");
+  }
+
+  @return join-to-string($out, ' and ');
+}
+
+

@@ -1,0 +1,59 @@
+@import "variables";
+
+@function prev-breakpoint($breakpoint) {
+  $index: index($breakpoints, $breakpoint) - 1;
+  @return if($index <= 0 or $index > length($breakpoints), null, nth($breakpoints, $index));
+
+}
+
+@function next-breakpoint($breakpoint) {
+  $index: index($breakpoints, $breakpoint) + 1;
+  @return if($index <= 0 or $index > length($breakpoints), null, nth($breakpoints, $index));
+
+}
+
+@function min-width-from-breakpoint($breakpoint) {
+  @return nth($breakpoint, 2)
+
+}
+
+@function max-width-from-breakpoint($breakpoint) {
+  @return nth($breakpoint, 3)
+}
+
+@function lte-breakpoints($breakpoint) {
+  $out: ();
+  $current-index: index($breakpoints, $breakpoint);
+
+  @for $i from 1 through length($breakpoints) {
+    @if ($i <= $current-index) {
+      $var: nth($breakpoints, $i);
+      $out: append($out, $var, comma);
+    }
+  }
+
+  @return $out;
+}
+
+@function gte-breakpoints($breakpoint) {
+  $out: ();
+  $current-index: index($breakpoints, $breakpoint);
+
+  @for $i from 1 through length($breakpoints) {
+    @if ($i >= $current-index) {
+      $var: nth($breakpoints, $i);
+      $out: append($out, $var, comma);
+    }
+  }
+
+  @return $out;
+}
+
+@function is-bw-breakpoints($breakpoint, $breakpoint-from, $breakpoint-to) {
+  $out: ();
+  $current-index: index($breakpoints, $breakpoint);
+  $from-index: index($breakpoints, $breakpoint-from);
+  $to-index: index($breakpoints, $breakpoint-to);
+
+  @return $current-index > $from-index and $current-index < $to-index;
+}

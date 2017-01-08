@@ -1,10 +1,7 @@
-$positions: 'top', 'right', 'bottom', 'left';
-$sizes: '', 's', 'm', 'l', 'xl';
-
-$breakpoint-s: 544px;
-$breakpoint-m: 768px;
-$breakpoint-l: 992px;
-$breakpoint-xl: 1200px;
+$breakpoint-s-treshold: 544px;
+$breakpoint-m-treshold: 768px;
+$breakpoint-l-treshold: 992px;
+$breakpoint-xl-treshold: 1200px;
 
 $vertical-size: auto;
 $horizontal-size: auto;
@@ -20,3 +17,15 @@ $north-collapsed-size: $horizontal-collapsed-size;
 $east-collapsed-size: $vertical-collapsed-size;
 $south-collapsed-size: $horizontal-collapsed-size;
 $west-collapsed-size: $vertical-collapsed-size;
+
+$breakpoints: (xs, null, $breakpoint-s-treshold - 1px), (s, $breakpoint-s-treshold, $breakpoint-m-treshold - 1px), (m, $breakpoint-m-treshold, $breakpoint-l-treshold - 1px), (l, $breakpoint-l-treshold, $breakpoint-xl-treshold - 1px), (xl, $breakpoint-xl-treshold, null);
+
+$xs-breakpoint: nth($breakpoints, 1);
+$s-breakpoint: nth($breakpoints, 2);
+$m-breakpoint: nth($breakpoints, 3);
+$l-breakpoint: nth($breakpoints, 4);
+$xl-breakpoint: nth($breakpoints, 5);
+
+$positions: 'top', 'right', 'bottom', 'left';
+$normal-sizes: $north-size $east-size $south-size $west-size;
+$collapsed-sizes: $north-collapsed-size $east-collapsed-size $south-collapsed-size $west-collapsed-size;

@@ -1,0 +1,33 @@
+@import "../src/variables";
+@import "../src/list";
+@import "../src/media";
+@import "../src/breakpoint";
+@import "true";
+
+@include test-module('Media') {
+
+  @include test('should render min and max media for s size') {
+    @include assert-equal(render-media((
+            min-width-from-breakpoint($s-breakpoint),
+            max-width-from-breakpoint($s-breakpoint))),
+            '( min-width: 544px ) and ( max-width: 767px )');
+
+  }
+
+  @include test('should render max only for xs size') {
+    @include assert-equal(render-media((
+            min-width-from-breakpoint($xs-breakpoint),
+            max-width-from-breakpoint($xs-breakpoint))),
+            '( max-width: 543px )');
+
+  }
+
+  @include test('should render min only for xl size') {
+    @include assert-equal(render-media((
+            min-width-from-breakpoint($xl-breakpoint),
+            max-width-from-breakpoint($xl-breakpoint))),
+            '( min-width: 1200px )');
+
+  }
+
+}

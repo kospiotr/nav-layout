@@ -1,0 +1,38 @@
+@import "../src/variables";
+@import "../src/selectors";
+@import "true";
+
+@include test-module('Selectors') {
+
+  @include test('should return correct suffixes for xs') {
+    @include assert-equal(get-selector-suffixes($xs-breakpoint),
+                    (unquote(''), -eq, -lte-xs, -gte-xs, -gte-s, -gte-m, -gte-l, -gte-xl));
+
+  }
+
+  @include test('should return correct suffixes for s') {
+    @include assert-equal(get-selector-suffixes($s-breakpoint),
+                    (unquote(''), -eq, -lte-xs, -lte-s, -gte-s, -gte-m, -gte-l, -gte-xl, -bw-xs-m, -bw-xs-l, -bw-xs-xl));
+
+  }
+
+  @include test('should return correct suffixes for m') {
+    @include assert-equal(get-selector-suffixes($m-breakpoint),
+                    (unquote(''), -eq, -lte-xs, -lte-s, -lte-m, -gte-m, -gte-l, -gte-xl, -bw-xs-l, -bw-xs-xl, -bw-s-l, -bw-s-xl));
+
+  }
+
+  @include test('should return correct suffixes for l') {
+    @include assert-equal(get-selector-suffixes($l-breakpoint),
+                    (unquote(''), -eq, -lte-xs, -lte-s, -lte-m, -lte-l, -gte-l, -gte-xl, -bw-xs-xl, -bw-s-xl, -bw-m-xl));
+
+  }
+
+  @include test('should return correct suffixes for xl') {
+    @include assert-equal(get-selector-suffixes($xl-breakpoint),
+                    (unquote(''), -eq, -lte-xs, -lte-s, -lte-m, -lte-l, -lte-xl, -gte-xl
+                    ));
+
+  }
+
+}

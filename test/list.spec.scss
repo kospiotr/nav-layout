@@ -1,0 +1,30 @@
+@import "../src/list";
+@import "true";
+
+@include test-module('List') {
+
+  @include test('should create empty list') {
+    @include assert-equal(asList(
+    ),
+                    ());
+
+  }
+
+  @include test('should create list of three arguments') {
+    @include assert-equal(asList(
+                    a, b, c
+    ),
+                    (a, b, c));
+
+  }
+
+  @include test('should join list arguments by cusom separator') {
+
+    @include assert-equal(join-to-string(
+                            (a, b, c), ' and '
+    ),
+            unquote('a and b and c'));
+
+  }
+
+}

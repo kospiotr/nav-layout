@@ -22,9 +22,9 @@
 <script>
     (function () {
 
-        var availablePositions = [null, 'nl-north', 'nl-east', 'nl-south', 'nl-west'];
+        var availablePositions = [null, 'nl-top', 'nl-right', 'nl-bottom', 'nl-left'];
         var heights = [null, availablePositions.map(function (e) {
-            return e === 'nl-north' || e === 'nl-south' ? 'style="width: 60px"' : 'style="width: 60px"'
+            return e === 'nl-top' || e === 'nl-bottom' ? 'style="width: 60px"' : 'style="width: 60px"'
         })];
         var close = ['nl-closed'];
         var offCanvas = ['nl-off-canvas'];
@@ -63,9 +63,9 @@
          *  - title - row title
          *  - layout options is Array<Array<Options>>
          *
-         *  For example: sections({layouts: [['nl-closed', 'nl-open'], ['nl-north','nl-south']]})
+         *  For example: sections({layouts: [['nl-closed', 'nl-open'], ['nl-top','nl-bottom']]})
          *  Will produce:
-         *      layout(nl-closed nl-north), layout(nl-closed nl-south),layout(nl-open nl-north),layout(nl-open nl-south),
+         *      layout(nl-closed nl-top), layout(nl-closed nl-bottom),layout(nl-open nl-top),layout(nl-open nl-bottom),
          * @param config
          * @returns {Array}
          */

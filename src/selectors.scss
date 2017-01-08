@@ -1,0 +1,47 @@
+@import "variables";
+@import "breakpoint";
+@import "list";
+
+@function get-selector-suffixes($breakpoint) {
+
+  $name: nth($breakpoint, 1);
+  $out: (unquote('-eq-' + $name));
+
+  @each $breakpoint in lte-breakpoints($breakpoint) {
+    $name: nth($breakpoint, 1);
+    $out: append($out, unquote('-lte-' + $name));
+  }
+
+  @each $breakpoint in gte-breakpoints($breakpoint) {
+    $name: nth($breakpoint, 1);
+    $out: append($out, unquote('-gte-' + $name));
+  }
+
+  @each $from in $breakpoints {
+    @each $to in $breakpoints {
+      @if (is-bw-breakpoints($breakpoint, $from, $to)) {
+        $name-from: nth($from, 1);
+        $name-to: nth($to, 1);
+        $out: append($out, unquote('-bw-' + $name-from + '-' + $name-to));
+      }
+    }
+  }
+
+  @return $out;
+}
+
+@mixin selector($prefix, $breakpoint) {
+  $out: ();
+  $suffixes: get-selector-suffixes($breakpoint);
+  @each $suffix in $suffixes {
+    $out: append($out, '&.'+$prefix + $suffix, comma);
+  }
+  $selectors: join-to-string($out, ',');
+
+  @debug #{$selectors};
+  //& {
+  #{$selectors} {
+    @content;
+    //}
+  }
+}
