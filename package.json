@@ -8,7 +8,7 @@
     "clean:test": "rm -rf build/test",
     "build:init": "mkdir -p build",
     "build:src": "node-sass src/nav-layout.scss build/nav-layout.css",
-    "build:site": "cp build/nav-layout.css src/site/",
+    "build:site": "cp -rf src/site/ build/site/ && cp build/nav-layout.css build/site",
     "build": "npm run clean:build && npm run build:init && npm run build:src && npm run build:site",
     "watch": "browser-sync start --server --files \"*.*\"",
     "dev": "browser-sync start --server . --files \"./**/*.*\"",

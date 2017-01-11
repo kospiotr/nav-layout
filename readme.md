@@ -4,19 +4,14 @@ Features:
 - pure css 
 - extensible   
 
-All classess: 
+All classes: 
 
-- nl-\[slot\]-top\[-size\]
-- nl-\[slot\]-right\[-size\]
-- nl-\[slot\]-bottom\[-size\]
-- nl-\[slot\]-left\[-size\]
-- nl-\[slot\]-off\[-size\]
-- nl-\[slot\]-closed\[-size\]
-- nl-\[slot\]-collapsed\[-size\]
-
-Permitted combinations:
-
-[slot] - [top|rght|bottom|left] - [size] - positions
+- nl-\[-off\]-top\[-size\]
+- nl-\[-off\]-right\[-size\]
+- nl-\[-off\]-bottom\[-size\]
+- nl-\[-off\]-left\[-size\]
+- nl-opened\[-size\]
+- nl-closed\[-size\]
 
 Sizes:
 
@@ -86,7 +81,27 @@ Between:
 | -bw-s-xl  | m, l             |
 | -bw-m-xl  | l                |
 
-Collisions:
+Priorities:
+
+If collision happens then following resolution has priority:
+
+| priority  | Size              |
+|-----------|-------------------|
+| 1         | no size specified |
+| 2         | -lte              |
+| 3         | -gte              | 
+| 4         | -bw               |
+
+Given classes ```nl-left-lte-xs nl-top-lte-m nl-opened nl-closed-eq-xs```  results in:
+
+|Prefix|Position	|Visibility|
+|------|------------|----------|
+| xs   |top	        |opened    |
+| s    |top	        |opened    |
+| m    |top	        |opened    |
+| l    |left	    |opened    |
+| xl   |left	    |opened    |
+
 
 CSS architecture
 

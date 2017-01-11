@@ -1,16 +1,24 @@
 @import 'variables';
-@import 'selectors';
 @import 'commons';
-@import 'media';
+@import 'selectors';
 
-@mixin media-breakpoints-for($breakpoint) {
+.nl-layout {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+}
 
-  $media: (
-          min-width-from-breakpoint($breakpoint),
-          max-width-from-breakpoint($breakpoint)
-  );
+.nl-aside {
+  box-sizing: border-box;
+}
 
-  @media #{render-media($media)} {
+.nl-content {
+  box-sizing: border-box;
+  flex: 1;
+}
+
+@each $breakpoint in $breakpoints {
+  @include media-breakpoint($breakpoint) {
     .nl-layout {
 
       & {
@@ -51,6 +59,18 @@
           }
         }
 
+        @include selector('opened', $breakpoint) {
+          > .nl-aside {
+            display: inherit;
+          }
+        }
+
+        @include selector('closed', $breakpoint) {
+          > .nl-aside {
+            display: none;
+          }
+        }
+
       }
 
       & {
@@ -72,27 +92,6 @@
         }
       }
     }
-
   }
-
-}
-
-.nl-layout {
-  position: relative;
-  display: flex;
-  box-sizing: border-box;
-}
-
-.nl-aside {
-  box-sizing: border-box;
-}
-
-.nl-content {
-  box-sizing: border-box;
-  flex: 1;
-}
-
-@each $breakpoint in $breakpoints {
-  @include media-breakpoints-for($breakpoint)
 }
 

@@ -1,2 +1,16 @@
 @import "variables";
 @import "breakpoint";
+@import "media";
+
+@mixin media-breakpoint($breakpoint) {
+
+  $media: (
+          min-width-from-breakpoint($breakpoint),
+          max-width-from-breakpoint($breakpoint)
+  );
+
+  @media #{render-media($media)} {
+    @content;
+  }
+
+}
